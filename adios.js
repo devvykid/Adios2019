@@ -3,7 +3,7 @@
 $(function(){
     function timer(settings){
         var config = {
-            endDate: '2020-01-01 00:00',
+            endDate: '2019-01-02 00:00',
             timeZone: 'Asia/Seoul',
             hours: $('#hours'),
             minutes: $('#minutes'),
