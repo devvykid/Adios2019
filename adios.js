@@ -3,12 +3,12 @@
 $(function(){
     function timer(settings){
         var config = {
-            endDate: '2020-01-01 00:00',
+            endDate: '2019-01-01 00:00',
             timeZone: 'Asia/Seoul',
             hours: $('#hours'),
             minutes: $('#minutes'),
             seconds: $('#seconds'),
-            newSubMessage: '2020년도 즐거운 한 해가 되길!'
+            newSubMessage: '2019년도 즐거운 한 해가 되길!'
         };
         function prependZero(number){
             return number < 10 ? '0' + number : number;
