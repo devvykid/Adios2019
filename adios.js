@@ -3,11 +3,12 @@
 $(function(){
     function timer(settings){
         var config = {
-            endDate: '2019-01-01 00:00',
+            endDate: '2019-01-11 00:00',
             timeZone: 'Asia/Seoul',
             hours: $('#hours'),
             minutes: $('#minutes'),
             seconds: $('#seconds'),
+            milliseconds: $('#milliseconds'),
             newSubMessage: '2019년도 즐거운 한 해가 되길!'
         };
         function prependZero(number){
@@ -35,6 +36,7 @@ $(function(){
             var hours = duration.hours(),
                 minutes = duration.minutes(),
                 seconds = duration.seconds();
+                milliseconds = duration.milliseconds();
             days = duration.days();
             if(hours  <= 0 && minutes <= 0 && seconds  <= 0 && days <= 0){
                 clearInterval(intervalID);
@@ -48,6 +50,7 @@ $(function(){
             config.hours.text(prependZero(hours));
             config.minutes.text(prependZero(minutes));
             config.seconds.text(prependZero(seconds));
+            config.milliseconds.text(prependZero(milliseconds));
         }, interval);
     }
     function endEvent($el, newText, hideEl){

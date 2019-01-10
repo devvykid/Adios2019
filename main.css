@@ -4,7 +4,6 @@
     list-style: none;
     box-sizing: border-box;
     outline: none;
-    font-weight: normal;
 }
 
 html {
@@ -14,8 +13,8 @@ html {
 }
 
 body {
-    background: #3498DB;
-    font-family: "Segoe UI", "Microsoft YaHei";
+    background: #448AFF;
+    font-family: "Malgun Gothic", "Segoe UI", sans-serif;
     font-size: 18px;
     height: 100%;
     width: 100%;
@@ -34,9 +33,22 @@ body {
 
 .timer {
     font-family: "Segment7Standard";
-    font-size: 60px;
+    font-size: 48px;
     display: inline-block;
     vertical-align: top;
+}
+
+.csec {
+    font-family: "Segment7Standard";
+    font-size:48px;
+    margin-left: -20px;
+    padding-left: -20px;
+    display:inline-block;
+    vertical-align: top;
+}
+
+.csecc {
+    margin-top: -41.5px;
 }
 
 .clock {
@@ -52,16 +64,19 @@ p {
 }
 
 h1 {
-    font-size: 60px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 70px;
+    font-weight: 300;
     color: #ffffff;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 h2 {
-    font-size: 16px;
+    font-size: 20px;
     color: #a3deff;
     margin: 0 0 10px;
+    font-weight: 300;
 }
 
 a {
@@ -80,7 +95,12 @@ a {
     }
 
     .timer {
-        font-size: 35px;
+        font-size: 38px;
+    }
+}
+@media only screen and (max-width: 450px) {
+    h1 {
+        font-size: 60px;
     }
 }
 
@@ -97,51 +117,6 @@ a {
     box-sizing: border-box;
 }
 
-.spinner {
-    width: 100px;
-    height: 100px;
-}
-
-.spinner > span,
-.spinner > span:before,
-.spinner > span:after {
-    content: "";
-    display: block;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-
-}
-
-.spinner > span {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border-left-color: transparent;
-    -webkit-animation: effect-2 2s infinite linear;
-    -moz-animation: effect-2 2s infinite linear;
-    -o-animation: effect-2 2s infinite linear;
-    animation: effect-2 2s infinite linear;
-}
-
-.spinner > span:before {
-    width: 75%;
-    height: 75%;
-    border-right-color: transparent;
-}
-
-.spinner > span:after {
-    width: 50%;
-    height: 50%;
-    border-bottom-color: transparent;
-}
 
 @-webkit-keyframes effect-2 {
     from {
