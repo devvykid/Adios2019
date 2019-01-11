@@ -32,14 +32,14 @@ body {
 }
 
 .timer {
-    font-family: "Segment7Standard";
+    font-family: "Segment7Standard" !important;
     font-size: 48px;
     display: inline-block;
     vertical-align: top;
 }
 
 .csec {
-    font-family: "Segment7Standard";
+    font-family: "Segment7Standard" !important;
     font-size:48px;
     margin-left: -20px;
     padding-left: -20px;
@@ -108,6 +108,19 @@ a {
         font-size: 60px;
     }
 }
+@media only screen and (max-width: 380px) {
+    h1 {
+        font-size: 50px;
+    }
+}
+@media only screen and (max-width: 344px) {
+    h1 {
+        font-size: 46px;
+    }
+    h2 {
+        font-size: 18px;
+    }
+}
 
 .container {
     width: 100%;
@@ -139,4 +152,25 @@ a {
     to {
         transform: rotate(360deg);
     }
+}
+
+.progress {
+    background-color: #77aaff !important;
+    width: 70% !important;
+    display:block;
+    margin: 0px auto;
+    margin-top: 45px !important;
+}
+
+.indeterminate {
+    background-color: #fff !important;
+}
+
+.loadtext {
+    margin-top: 5px;
+}
+
+.nowrap {
+    white-space: nowrap;
+    display: inline;
 }

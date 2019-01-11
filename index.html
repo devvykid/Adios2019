@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <link rel="stylesheet" href="main.css" type="text/css"/>
   <meta name="theme-color" content="#448AFF"/>
   <title>Adiós, 2019!</title>
@@ -12,14 +14,42 @@
 <body>
   <div class="wrapper">
     <h1>Adiós, 2019!</h1>
-    <h2>올해 한 해, 뜻 깊은 한 해 였기를... Adiós, 2019!</h2>
+    <h2><div class="nowrap">올해 한 해, 뜻 깊은 한 해 였기를... </div> <div class="nowrap">Adiós, 2019!</div></h2>
+    <script type="text/javascript">
+      var RetryMax = 3;
+      var RetryCount = 0;
+      var AcceptedDelay = 500;
+      
+      SyncTime();
+      
+      function SyncTime() {
+        var StartTime = new Date();
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("HEAD", "http://www.googleapis.com",true);
+        xmlhttp.onreadystatechange=function() {
+          if (xmlhttp.readyState==4) {
+            TimeDiff = new Date(xmlhttp.getResponseHeader("Date")) - (new Date()) + ((new Date()) - StartTime) / 2;
+            if (++RetryCount < RetryMax && (new Date()) - StartTime > AcceptedDelay) {
+              return SyncTime();
+            }
+            else {
+              var diff = parseInt(TimeDiff, 10);
+              alert(diff);
+              return diff;
+
+            }
+          }
+        }
+        xmlhttp.send(null);
+      }
+    </script>
     <script type="text/javascript">
       function pad(n, width) {
         n = n + '';
         return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
       }
       // 3초 빠르게 OffSet 설정
-      var countDownDate = new Date("Dec 31, 2019 23:59:57").getTime();
+      var countDownDate = new Date("Jan 01, 2020 00:00:00").getTime();
       // 0.01 초마다 업데이트
       var x = setInterval(function() {
         // Get todays date and time
@@ -45,7 +75,13 @@
         }
       }, 10);
     </script>
-    <div class="clock">
+    <div align="center" class="progress">
+      <div align="center" class="indeterminate"></div>
+    </div>
+    <div class="loadtext">
+      Loading..
+    </div>
+    <div class="clock" style="display:none">
       <div class="column">
         <div class="timer" id="days"></div>
         <div class="text">일</div>
