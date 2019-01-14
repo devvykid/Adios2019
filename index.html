@@ -20,8 +20,6 @@
       var RetryCount = 0;
       var AcceptedDelay = 500;
       
-      SyncTime();
-      
       function SyncTime() {
         var StartTime = new Date();
         xmlhttp = new XMLHttpRequest();
@@ -35,13 +33,20 @@
             else {
               var diff = parseInt(TimeDiff, 10);
               alert(diff);
-              return diff;
+              return diff + '';
 
             }
           }
         }
         xmlhttp.send(null);
       }
+    </script>
+    <script type="text/javascript">
+    	document.getElementById("debug1").innerHTML = SyncTime();
+
+
+    	
+        
     </script>
     <script type="text/javascript">
       function pad(n, width) {
@@ -108,9 +113,20 @@
       </div>
     </div>
   </div>
+  <div class="text" id="debug1"></div>
+  <div class="text" id="debug2"></div>
+  <div class="text" id="debug3"></div>
+  <div class="text" id="debug4"></div>
+  <div class="text" id="debug5"></div>
+  <div class="text" id="debug6"></div>
+  <div class="text" id="debug7"></div>
+  <div class="text" id="debug8"></div>
+  <div class="text" id="debug9"></div>
+  <div class="text" id="debug10"></div>
+  <div class="text" id="debug11"></div>
+  <div class="text" id="debug12"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   
-  
-  <script type="text/javascript" src="adios.js"></script>
+
 </body>
 </html>
