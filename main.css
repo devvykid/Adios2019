@@ -47,10 +47,6 @@ body {
     vertical-align: top;
 }
 
-.csecc {
-    margin-top: -41.5px;
-}
-
 .clock {
     margin-top: 30px;
 }
@@ -98,19 +94,25 @@ a {
         font-size: 38px;
     }
 }
-@media only screen and (min-width: 768px) {
-    .csecc {
-        margin-top: -51px;
-    }
-}
 @media only screen and (max-width: 450px) {
     h1 {
         font-size: 60px;
     }
 }
+@media only screen and (max-width: 405px) {
+    .timer {
+        font-size: 34px;
+    }
+}
+
 @media only screen and (max-width: 380px) {
     h1 {
         font-size: 50px;
+    }
+}
+@media only screen and (max-width: 370px) {
+    .timer {
+        font-size: 30px;
     }
 }
 @media only screen and (max-width: 344px) {
@@ -119,6 +121,11 @@ a {
     }
     h2 {
         font-size: 18px;
+    }
+}
+@media only screen and (max-width: 335px) {
+    .timer {
+        font-size: 26px;
     }
 }
 
@@ -133,25 +140,6 @@ a {
     margin: 0 auto;
     position: relative;
     box-sizing: border-box;
-}
-
-
-@-webkit-keyframes effect-2 {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes effect-2 {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 .progress {

@@ -15,78 +15,66 @@
   <div class="wrapper">
     <h1>Adiós, 2019!</h1>
     <h2><div class="nowrap">올해 한 해, 뜻 깊은 한 해 였기를... </div> <div class="nowrap">Adiós, 2019!</div></h2>
-    <script type="text/javascript">
-      var RetryMax = 3;
-      var RetryCount = 0;
-      var AcceptedDelay = 500;
-      
-      function SyncTime() {
-        var StartTime = new Date();
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("HEAD", "http://www.googleapis.com",true);
-        xmlhttp.onreadystatechange=function() {
-          if (xmlhttp.readyState==4) {
-            TimeDiff = new Date(xmlhttp.getResponseHeader("Date")) - (new Date()) + ((new Date()) - StartTime) / 2;
-            if (++RetryCount < RetryMax && (new Date()) - StartTime > AcceptedDelay) {
-              return SyncTime();
-            }
-            else {
-              var diff = parseInt(TimeDiff, 10);
-              alert(diff);
-              return diff + '';
-
-            }
-          }
-        }
-        xmlhttp.send(null);
-      }
-    </script>
-    <script type="text/javascript">
-    	document.getElementById("debug1").innerHTML = SyncTime();
-
-
-    	
-        
-    </script>
+    
     <script type="text/javascript">
       function pad(n, width) {
         n = n + '';
         return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
       }
-      // 3초 빠르게 OffSet 설정
-      var countDownDate = new Date("Jan 01, 2020 00:00:00").getTime();
-      // 0.01 초마다 업데이트
-      var x = setInterval(function() {
-        // Get todays date and time
-        var now = new Date().getTime();
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        var centisec = Math.floor(((distance % (1000 * 60)) / 10)%100);
-        // Output the result in an element with id="demo"
-        document.getElementById("days").innerHTML = days;
-        document.getElementById("hours").innerHTML = pad(hours, 2);
-        document.getElementById("minutes").innerHTML = pad(minutes, 2);
-        document.getElementById("seconds").innerHTML = pad(seconds, 2);
-        document.getElementById("centiseconds").innerHTML = pad(centisec, 2);
-        // If the count down is over, write some text 
-        if (distance < 0) {
-          clearInterval(x);
-          document.getElementById("days").innerHTML = "EXPIRED";
-        }
-      }, 10);
+      setTimeout(function(){
+
+      	console.log("Works!");
+      	function changeDisplay(divname){
+		    var foo = document.getElementById(divname);
+		    if(foo.style.display == 'none'){
+		        foo.style.display = 'block';
+		    } else {
+		        foo.style.display = 'none';
+		        //console.log("Fuck!");
+		    }
+		}
+		changeDisplay("loading")
+		changeDisplay("clockdiv");
+
+
+      	// 3초 빠르게 OffSet 설정
+     	var countDownDate = new Date("Jan 01, 2020 00:00:00").getTime();
+      	// 0.01 초마다 업데이트
+      	var x = setInterval(function() {
+        	// Get todays date and time
+        	var now = new Date().getTime();
+        	// Find the distance between now and the count down date
+        	var distance = countDownDate - now;
+        	// Time calculations for days, hours, minutes and seconds
+        	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        	var centisec = Math.floor(((distance % (1000 * 60)) / 10)%100);
+        	// Output the result in an element with id="demo"
+        	document.getElementById("days").innerHTML = days;
+        	document.getElementById("hours").innerHTML = pad(hours, 2);
+        	document.getElementById("minutes").innerHTML = pad(minutes, 2);
+        	document.getElementById("seconds").innerHTML = pad(seconds, 2);
+        	document.getElementById("centiseconds").innerHTML = pad(centisec, 2);
+        	// If the count down is over, write some text 
+        	if (distance < 0) {
+        	  clearInterval(x);
+        	  document.getElementById("days").innerHTML = "EXPIRED";
+        	}
+      	}, 10);
+      }, 2000);
+      
     </script>
-    <div align="center" class="progress">
-      <div align="center" class="indeterminate"></div>
-    </div>
-    <div class="loadtext">
-      Loading..
-    </div>
-    <div class="clock" style="display:none">
+    <div id="loading">
+    	<div align="center" class="progress">
+    	  <div align="center" class="indeterminate"></div>
+    	</div>
+    	<div class="loadtext">
+    	  Loading..
+    	</div>
+	</div>
+    <div class="clock" id="clockdiv" style="display:none">
       <div class="column">
         <div class="timer" id="days"></div>
         <div class="text">일</div>
@@ -108,23 +96,11 @@
       </div>
       <div class="timer csec">.</div>
       <div class="column">
-        <div class="timer csecc" id="centiseconds"></div>
-        <div class="text"> </div>
+        <div class="timer" id="centiseconds"></div>
+        <div class="text"><pre> </pre></div>
       </div>
     </div>
   </div>
-  <div class="text" id="debug1"></div>
-  <div class="text" id="debug2"></div>
-  <div class="text" id="debug3"></div>
-  <div class="text" id="debug4"></div>
-  <div class="text" id="debug5"></div>
-  <div class="text" id="debug6"></div>
-  <div class="text" id="debug7"></div>
-  <div class="text" id="debug8"></div>
-  <div class="text" id="debug9"></div>
-  <div class="text" id="debug10"></div>
-  <div class="text" id="debug11"></div>
-  <div class="text" id="debug12"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   
 
