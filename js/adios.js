@@ -3,8 +3,7 @@ function pad(n, width) {
     return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
 }
 setTimeout(function() {
-
-
+    var newyear_debug = 0;
     function changeDisplay(divname) {
         var foo = document.getElementById(divname);
         if (foo.style.display == 'none') {
@@ -14,10 +13,8 @@ setTimeout(function() {
             //console.log("Fuck!");
         }
     }
-    console.log("fireworks start!");
-    startfireworks();
 
-    console.log("clock display!");
+    console.log("Loaded!");
     changeDisplay("loading")
     changeDisplay("clockdiv");
 
@@ -29,7 +26,11 @@ setTimeout(function() {
         // Get todays date and time
         var now = new Date().getTime();
         // Find the distance between now and the count down date
-        var distance = countDownDate - now;
+        if(newyear_debug){
+          var distance = -1;
+        }else{
+          var distance = countDownDate - now;
+        }
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -45,7 +46,16 @@ setTimeout(function() {
         // If the count down is over, write some text 
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("days").innerHTML = "EXPIRED";
+            document.getElementById("days").innerHTML = '00';
+            document.getElementById("hours").innerHTML = '00';
+            document.getElementById("minutes").innerHTML = '00';
+            document.getElementById("seconds").innerHTML = '00';
+            document.getElementById("centiseconds").innerHTML = '00';
+            console.log("Happy New Year!");
+            startfireworks();
+            setTimeout(function(){
+              stopfireworks();
+            }, 60000);
         }
     }, 10);
-}, 2000);
+}, 1000);
