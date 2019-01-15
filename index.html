@@ -1,80 +1,67 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
-  <link rel="stylesheet" href="main.css" type="text/css"/>
-  <meta name="theme-color" content="#448AFF"/>
-  <title>Adiós, 2019!</title>
-</head>
-<body>
-  <div class="wrapper">
-    <h1>Adiós, 2019!</h1>
-    <h2>올해 한 해, 뜻 깊은 한 해 였기를... Adiós, 2019!</h2>
-    <script type="text/javascript">
-      function pad(n, width) {
-        n = n + '';
-        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-      }
-      // 3초 빠르게 OffSet 설정
-      var countDownDate = new Date("Dec 31, 2019 23:59:57").getTime();
-      // 0.01 초마다 업데이트
-      var x = setInterval(function() {
-        // Get todays date and time
-        var now = new Date().getTime();
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        var centisec = Math.floor(((distance % (1000 * 60)) / 10)%100);
-        // Output the result in an element with id="demo"
-        document.getElementById("days").innerHTML = days;
-        document.getElementById("hours").innerHTML = pad(hours, 2);
-        document.getElementById("minutes").innerHTML = pad(minutes, 2);
-        document.getElementById("seconds").innerHTML = pad(seconds, 2);
-        document.getElementById("centiseconds").innerHTML = pad(centisec, 2);
-        // If the count down is over, write some text 
-        if (distance < 0) {
-          clearInterval(x);
-          document.getElementById("days").innerHTML = "EXPIRED";
-        }
-      }, 10);
-    </script>
-    <div class="clock">
-      <div class="column">
-        <div class="timer" id="days"></div>
-        <div class="text">일</div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="js/adios.js"></script>
+    <script src="js/fireworks.js"></script>
+
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <meta name="theme-color" content="#448AFF" />
+    <title>Adiós, 2019!</title>
+    <meta name="description" content="올해 한 해, 뜻 깊은 한 해 였기를.. Adiós, 2019! - 새해 카운트다운 by 컴터박" />
+  </head>
+
+  <body>
+      <div class="wrapper" id="wrapper">
+      <h1>Adiós, 2019!</h1>
+      <h2>
+        <div class="nowrap">올해 한 해, 뜻 깊은 한 해 였기를... </div>
+        <div class="nowrap">Adiós, 2019!</div>
+      </h2>
+      <div id="loading">
+        <div align="center" class="progress">
+          <div align="center" class="indeterminate"></div>
+        </div>
+        <div class="loadtext">
+          Loading..
+        </div>
       </div>
-      <div class="timer">:</div>
-      <div class="column">
-        <div class="timer" id="hours"></div>
-        <div class="text">시간</div>
-      </div>
-      <div class="timer">:</div>
-      <div class="column">
-        <div class="timer" id="minutes"></div>
-        <div class="text">분</div>
-      </div>
-      <div class="timer">:</div>
-      <div class="column">
-        <div class="timer" id="seconds"></div>
-        <div class="text">초</div>
-      </div>
-      <div class="timer csec">.</div>
-      <div class="column">
-        <div class="timer csecc" id="centiseconds"></div>
-        <div class="text"> </div>
+      <div class="clock" id="clockdiv" style="display:none">
+        <div class="column">
+          <div class="timer" id="days"></div>
+          <div class="text">일</div>
+        </div>
+        <div class="timer">:</div>
+        <div class="column">
+          <div class="timer" id="hours"></div>
+          <div class="text">시간</div>
+        </div>
+        <div class="timer">:</div>
+        <div class="column">
+          <div class="timer" id="minutes"></div>
+          <div class="text">분</div>
+        </div>
+        <div class="timer">:</div>
+        <div class="column">
+          <div class="timer" id="seconds"></div>
+          <div class="text">초</div>
+        </div>
+        <div class="timer csec">.</div>
+        <div class="column">
+          <div class="timer" id="centiseconds"></div>
+          <div class="text">
+            <pre> </pre>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
-  
-  <script type="text/javascript" src="adios.js"></script>
-</body>
+
+  </body>
+
 </html>

@@ -6,6 +6,16 @@
     outline: none;
 }
 
+html,
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    /*background: #000;*/
+    /*overflow: hidden;*/
+}
+
 html {
     height: 100%;
     display: table;
@@ -32,23 +42,19 @@ body {
 }
 
 .timer {
-    font-family: "Segment7Standard";
+    font-family: "Segment7Standard" !important;
     font-size: 48px;
     display: inline-block;
     vertical-align: top;
 }
 
 .csec {
-    font-family: "Segment7Standard";
-    font-size:48px;
+    font-family: "Segment7Standard" !important;
+    font-size: 48px;
     margin-left: -20px;
     padding-left: -20px;
-    display:inline-block;
+    display: inline-block;
     vertical-align: top;
-}
-
-.csecc {
-    margin-top: -41.5px;
 }
 
 .clock {
@@ -98,14 +104,44 @@ a {
         font-size: 38px;
     }
 }
-@media only screen and (min-width: 768px) {
-    .csecc {
-        margin-top: -51px;
-    }
-}
+
 @media only screen and (max-width: 450px) {
     h1 {
         font-size: 60px;
+    }
+}
+
+@media only screen and (max-width: 405px) {
+    .timer {
+        font-size: 34px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    h1 {
+        font-size: 50px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .timer {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 344px) {
+    h1 {
+        font-size: 46px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 335px) {
+    .timer {
+        font-size: 26px;
     }
 }
 
@@ -122,21 +158,37 @@ a {
     box-sizing: border-box;
 }
 
-
-@-webkit-keyframes effect-2 {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.progress {
+    background-color: #77aaff !important;
+    width: 70% !important;
+    display: block;
+    margin: 0px auto;
+    margin-top: 45px !important;
 }
 
-@keyframes effect-2 {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.indeterminate {
+    background-color: #fff !important;
+}
+
+.loadtext {
+    margin-top: 5px;
+}
+
+.nowrap {
+    white-space: nowrap;
+    display: inline;
+}
+
+#wrapper {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+#fireworkcanvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
 }
