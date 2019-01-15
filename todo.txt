@@ -1,0 +1,17 @@
+//added load bar
+
+//320 px 깨짐 수정
+
+//added fireworks
+//fixed segment7 font issue (bad markup)
+//beautify js
+//fireworks canvas 수정
+
+----------------------------------------------
+//accurate time
+//바톤터치 --> PHP
+
+
+// Adios2018 -> Appengine
+// Api checker -> Heroku OR ara server
+

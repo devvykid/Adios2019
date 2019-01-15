@@ -1,3 +1,11 @@
+/**
+  * fireworks.js by Computerpark
+  * Original Script by dtrooper
+  * see: https://jsfiddle.net/XWMpq/
+  * Modified and redistributed under Apache 2.0 LICENSE.
+  * https://github.com/computerpark/Adios2018
+  */
+
 var SCREEN_WIDTH = window.innerWidth,
     SCREEN_HEIGHT = window.innerHeight,
     mousePos = {
@@ -78,7 +86,7 @@ function launch() {
 }
 
 function launchFrom(x) {
-    if (rockets.length < 10) {
+    if (rockets.length < 6) {
         var rocket = new Rocket(x);
         rocket.explosionColor = Math.floor(Math.random() * 360 / 10) * 10;
         rocket.vel.y = Math.random() * -3 - 4;
@@ -100,9 +108,15 @@ function loop() {
     }
 
     // clear canvas
-    context.fillStyle = "rgba(68,138,255)";
+    context.fillStyle = "rgba(68, 138, 255)";
     context.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
+    updateRockets();
+
+    updateFireworks();
+}
+
+function updateRockets() {
     var existingRockets = [];
 
     for (var i = 0; i < rockets.length; i++) {
@@ -110,19 +124,20 @@ function loop() {
         rockets[i].update();
         rockets[i].render(context);
 
+        addSmoke(rockets[i].pos);
+
         // calculate distance with Pythagoras
         var distance = Math.sqrt(Math.pow(mousePos.x - rockets[i].pos.x, 2) + Math.pow(mousePos.y - rockets[i].pos.y, 2));
 
         // random chance of 1% if rockets is above the middle
         var randomChance = rockets[i].pos.y < (SCREEN_HEIGHT * 2 / 3) ? (Math.random() * 100 <= 1) : false;
 
-        /* Explosion rules
-                     - 80% of screen
-                    - going down
-                    - close to the mouse
-                    - 1% chance of random explosion
-                */
-        if (rockets[i].pos.y < SCREEN_HEIGHT / 5 || rockets[i].vel.y >= 0 || distance < 50 || randomChance) {
+        if (rockets[i].pos.y < SCREEN_HEIGHT / 3 || randomChance) {
+            rockets[i].resistance = 0.98;
+        }
+
+        // Explosion rules: 1 - going down 2- close to the mouse
+        if (rockets[i].pos.y < SCREEN_HEIGHT / 6 || Math.abs(rockets[i].vel.y) <= 1 || distance < 30) {
             rockets[i].explode();
         } else {
             existingRockets.push(rockets[i]);
@@ -130,7 +145,9 @@ function loop() {
     }
 
     rockets = existingRockets;
+}
 
+function updateFireworks() {
     var existingParticles = [];
 
     for (var i = 0; i < particles.length; i++) {
@@ -148,6 +165,14 @@ function loop() {
 
     while (particles.length > MAX_PARTICLES) {
         particles.shift();
+    }
+}
+
+function addSmoke(pos) {
+    if (Math.random() < 0.6) {
+        var smoke = new Smoke(pos);
+        smoke.vel.x = Math.random() * 1 - 0.5;
+        particles.push(smoke);
     }
 }
 
@@ -227,8 +252,7 @@ Particle.prototype.exists = function() {
 function Rocket(x) {
     Particle.apply(this, [{
         x: x,
-        y: SCREEN_HEIGHT
-    }]);
+        y: SCREEN_HEIGHT}]);
 
     this.explosionColor = 0;
 }
@@ -237,17 +261,29 @@ Rocket.prototype = new Particle();
 Rocket.prototype.constructor = Rocket;
 
 Rocket.prototype.explode = function() {
-    var count = Math.random() * 10 + 80;
 
+    // decide explosion shape for this rocket
+    var explosionFunction;
+    switch (Math.floor(Math.random() * 4)) {
+    case 0:
+        explosionFunction = heartShape;
+        break;
+    case 1:
+        explosionFunction = starShape;
+        break;
+    default:
+        explosionFunction = sphereShape;
+    }
+
+    // number of particles to be generated
+    var count = Math.random() * 10 + 70;
+
+    // create particles
     for (var i = 0; i < count; i++) {
         var particle = new Particle(this.pos);
-        var angle = Math.random() * Math.PI * 2;
 
-        // emulate 3D effect by using cosine and put more particles in the middle
-        var speed = Math.cos(Math.random() * Math.PI / 2) * 15;
-
-        particle.vel.x = Math.cos(angle) * speed;
-        particle.vel.y = Math.sin(angle) * speed;
+        // delegate to a random chosen function
+        particle.vel = explosionFunction();
 
         particle.size = 10;
 
@@ -271,20 +307,101 @@ Rocket.prototype.render = function(c) {
 
     c.globalCompositeOperation = 'lighter';
 
-    var x = this.pos.x,
-        y = this.pos.y,
-        r = this.size / 2;
-
-    var gradient = c.createRadialGradient(x, y, 0.1, x, y, r);
-    gradient.addColorStop(0.1, "rgba(255, 255, 255 ," + this.alpha + ")");
-    gradient.addColorStop(1, "rgba(0, 0, 0, " + this.alpha + ")");
-
-    c.fillStyle = gradient;
-
+    c.fillStyle = "rgb(255, 200, 0)"; // orange
     c.beginPath();
-    c.arc(this.pos.x, this.pos.y, this.flick ? Math.random() * this.size / 2 + this.size / 2 : this.size, 0, Math.PI * 2, true);
+
+    // draw several particles for each rocket position
+    for (var i = 0; i < 5; i++) {
+        var angle = Math.random() * Math.PI * 2,
+            pos = Math.random() * this.size / 2; // use size like radius
+        // draw several 1px particles
+        c.arc(this.pos.x + Math.cos(angle) * pos, this.pos.y + Math.sin(angle) * pos, 1.2, 0, Math.PI * 2, true);
+    }
     c.closePath();
     c.fill();
 
     c.restore();
 };
+
+function Smoke(pos) {
+    Particle.apply(this, [pos]);
+    this.size = 1;
+    this.vel.x = Math.random() * 0.01;
+    this.vel.y = Math.random() * 0.01;
+    this.gravity = -0.2;
+    this.resistance = 0.01;
+    this.shrink = 1.03;
+    this.fade = Math.random() * 0.03 + 0.02;
+    this.alpha = 1;
+    this.start = 0;
+}
+
+Smoke.prototype = new Particle();
+Smoke.prototype.constructor = Smoke;
+
+Smoke.prototype.render = function(c) {
+    if (!this.exists()) {
+        return;
+    }
+
+    c.save();
+
+    c.globalCompositionOperation = "lighter";
+
+    var x = this.pos.x,
+        y = this.pos.y,
+        r = this.size / 2;
+
+    var gradient = c.createRadialGradient(x, y, 0.1, x, y, r);
+    gradient.addColorStop(0.1, "rgba(119, 170, 255," + this.alpha + ")");
+    gradient.addColorStop(1, "rgba(222, 222, 222 ," + this.alpha + ")");
+
+    c.fillStyle = gradient;
+
+    c.beginPath();
+    c.arc(this.pos.x, this.pos.y, this.size, 0, Math.PI * 2, true);
+    c.lineTo(this.pos.x, this.pos.y);
+    c.closePath();
+    c.fill();
+
+    c.restore();
+}
+
+Particle.prototype.exists = function() {
+    return this.alpha >= 0.01;
+};
+
+function sphereShape() {
+    var angle = Math.random() * Math.PI * 2;
+
+    // emulate 3D effect by using cosine and put more particles in the middle
+    var speed = Math.cos(Math.random() * Math.PI / 2) * 11;
+
+    return {
+        x: Math.cos(angle) * speed,
+        y: Math.sin(angle) * speed
+    };
+}
+
+function starShape() {
+    var angle = Math.random() * Math.PI * 2;
+    // sin(5*r) creates a star, need to add PI to rotate 180 degrees
+    var speed = Math.sin(5 * angle + Math.PI) * 9 + Math.random() * 3;
+
+    return {
+        x: Math.cos(angle) * speed,
+        y: Math.sin(angle) * speed
+    };
+}
+
+function heartShape() {
+    var angle = Math.random() * Math.PI * 2;
+
+    var speed = Math.random() * 0.2 + 0.5;
+
+    // invert y speed to display heart in the right orientation
+    return {
+        x: (16 * Math.pow(Math.sin(angle), 3)) * speed,
+        y: (13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle)) * -speed
+    };
+}
