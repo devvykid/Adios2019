@@ -108,7 +108,7 @@ function loop() {
     }
 
     // clear canvas
-    context.fillStyle = "rgba(0, 0, 0, 0.05)";
+    context.fillStyle = "rgba(68, 138, 255)";
     context.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     updateRockets();
@@ -353,8 +353,8 @@ Smoke.prototype.render = function(c) {
         r = this.size / 2;
 
     var gradient = c.createRadialGradient(x, y, 0.1, x, y, r);
-    gradient.addColorStop(0.1, "rgba(200, 200, 200," + this.alpha + ")");
-    gradient.addColorStop(1, "rgba(150, 150, 150 ," + this.alpha + ")");
+    gradient.addColorStop(0.1, "rgba(119, 170, 255," + this.alpha + ")");
+    gradient.addColorStop(1, "rgba(222, 222, 222 ," + this.alpha + ")");
 
     c.fillStyle = gradient;
 
