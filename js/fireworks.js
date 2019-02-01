@@ -18,9 +18,8 @@ var SCREEN_WIDTH = window.innerWidth,
     context = canvas.getContext('2d'),
     particles = [],
     rockets = [],
-    MAX_PARTICLES = 400,
-    colorCode = 0;
-    canvas.id = "fireworkcanvas"
+    MAX_PARTICLES = 400;
+    canvas.id = "fireworkcanvas";
 
 function startfireworks() {
 
@@ -46,12 +45,12 @@ function startfireworks() {
 
     // launch more rockets!!!
     $(document).mousedown(function(e) {
-        for (var i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             launchFrom(Math.random() * SCREEN_WIDTH * 2 / 3 + SCREEN_WIDTH / 6);
         }
     });
     setInterval(function() {
-        for (var i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             launchFrom(Math.random() * SCREEN_WIDTH * 2 / 3 + SCREEN_WIDTH / 6);
         }
     }, 333);
@@ -72,7 +71,7 @@ function stopfireworks(){
             count++;
             fwctx.globalAlpha = (100-count) * 0.01;
             //console.log(count);
-            if(count == 101) {
+            if(count === 101) {
                 firework_canvas.remove();
             }
         }, 33 * start);
@@ -100,10 +99,10 @@ function launchFrom(x) {
 
 function loop() {
     // update screen size
-    if (SCREEN_WIDTH != window.innerWidth) {
+    if (SCREEN_WIDTH !== window.innerWidth) {
         canvas.width = SCREEN_WIDTH = window.innerWidth;
     }
-    if (SCREEN_HEIGHT != window.innerHeight) {
+    if (SCREEN_HEIGHT !== window.innerHeight) {
         canvas.height = SCREEN_HEIGHT = window.innerHeight;
     }
 
@@ -171,7 +170,7 @@ function updateFireworks() {
 function addSmoke(pos) {
     if (Math.random() < 0.6) {
         var smoke = new Smoke(pos);
-        smoke.vel.x = Math.random() * 1 - 0.5;
+        smoke.vel.x = Math.random() - 0.5;
         particles.push(smoke);
     }
 }
@@ -258,8 +257,6 @@ function Rocket(x) {
 }
 
 Rocket.prototype = new Particle();
-Rocket.prototype.constructor = Rocket;
-
 Rocket.prototype.explode = function() {
 
     // decide explosion shape for this rocket
@@ -365,7 +362,7 @@ Smoke.prototype.render = function(c) {
     c.fill();
 
     c.restore();
-}
+};
 
 Particle.prototype.exists = function() {
     return this.alpha >= 0.01;
