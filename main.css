@@ -92,6 +92,13 @@ h2 {
     font-weight: 300;
 }
 
+h3 {
+    font-size: 20px;
+    color: #a3deff;
+    margin: 0 0 10px;
+    font-weight: 200;
+}
+
 a {
     color: #a3deff;
     text-decoration: none;
@@ -142,6 +149,10 @@ a {
     }
 
     h2 {
+        font-size: 18px;
+    }
+
+    h3 {
         font-size: 18px;
     }
 }

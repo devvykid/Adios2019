@@ -1,6 +1,6 @@
 /**
   * Adios.js by computerpark
-  * https://github.com/computerpark/Adios2018
+  * https://github.com/computerpark/Adios2019
   * Distributed under Apache 2.0 LICENSE.
   */
 
@@ -9,7 +9,7 @@ function pad(n, width) {
     return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
 }
 setTimeout(function() {
-    var newyear_debug = 1;
+    var newyear_debug = 0;
     function changeDisplay(divname) {
         var foo = document.getElementById(divname);
         if (foo.style.display == 'none') {
@@ -25,11 +25,18 @@ setTimeout(function() {
     changeDisplay("clockdiv");
 
 
-    // 3초 빠르게 OffSet 설정
+    console.log("Reload ASYNC Set!");
+    setInterval(function(){
+        $("#clockdiv").load(window.location.href + "#clockdiv");
+        console.log('reloading...');
+    },19000);
+
+
+    // 날짜 설정
     var countDownDate = new Date("Jan 01, 2020 00:00:00").getTime();
     // 0.01 초마다 업데이트
     var x = setInterval(function() {
-        // Get todays date and time
+        // Get today's date and time
         var now = new Date().getTime();
         // Find the distance between now and the count down date
         if(newyear_debug){
@@ -43,7 +50,6 @@ setTimeout(function() {
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         var centisec = Math.floor(((distance % (1000 * 60)) / 10) % 100);
-        // Output the result in an element with id="demo"
         document.getElementById("days").innerHTML = days;
         document.getElementById("hours").innerHTML = pad(hours, 2);
         document.getElementById("minutes").innerHTML = pad(minutes, 2);
