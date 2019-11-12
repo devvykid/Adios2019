@@ -27,8 +27,8 @@ setTimeout(function() {
 
     console.log("Reload ASYNC Set!");
     setInterval(function(){
-        $("#clockdiv").load(window.location.href + "#clockdiv");
-        console.log('reloading...');
+        //TODO: Reload
+        //console.log('reloading...');
     },19000);
 
 
