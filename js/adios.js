@@ -9,7 +9,7 @@ function pad(n, width) {
     return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
 }
 setTimeout(function() {
-    var newyear_debug = 0;
+    var newyear_debug = 1;
     function changeDisplay(divname) {
         var foo = document.getElementById(divname);
         if (foo.style.display == 'none') {

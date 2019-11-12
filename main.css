@@ -93,10 +93,11 @@ h2 {
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 15px;
     color: #a3deff;
     margin: 0 0 10px;
     font-weight: 200;
+    line-height: 20px;
 }
 
 a {
@@ -153,8 +154,9 @@ a {
     }
 
     h3 {
-        font-size: 18px;
+        font-size: 14px;
     }
+
 }
 
 @media only screen and (max-width: 335px) {
