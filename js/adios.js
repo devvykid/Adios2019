@@ -20,6 +20,16 @@ setTimeout(function() {
         }
     }
 
+    function DisplayNone(divname) {
+        var foo = document.getElementById(divname);
+        foo.style.display = 'none';
+    }
+
+    function DisplayBlock(divname) {
+        var foo = document.getElementById(divname);
+        foo.style.display = 'block';
+    }
+
     console.log("Loaded!");
     changeDisplay("loading")
     changeDisplay("clockdiv");
@@ -64,6 +74,7 @@ setTimeout(function() {
             document.getElementById("seconds").innerHTML = '00';
             document.getElementById("centiseconds").innerHTML = '00';
             console.log("Happy New Year!");
+            DisplayBlock("clockdiv")
             startfireworks();
             setTimeout(function(){
               stopfireworks();
